@@ -42,10 +42,16 @@ function App() {
         let setNewTask = [newTask, ...tasks]
         setTasks(setNewTask)
     }
+    //Change status of task
+    function changeStatus(taskId: string) {
+        let task = tasks.find(t => taskId === t.id) //task is object
+        console.log(task)
+    }
 
     return (
         <div className="App">
             <Todolist title={'What to learn?'} task={tasksForTodolist}
+                      changeTaskStatus = {changeStatus}
                       changeFilter={changeFilter}
                       addTask={addTask}
                       removeTask={removeTask}/>
