@@ -13,17 +13,17 @@ function App() {
         {id: v1(), title: 'JS', isDone: true},
         {id: v1(), title: 'React', isDone: false},
         {id: v1(), title: 'Redux', isDone: false}
-    ])
+    ]);
 
     //to remove a task
     function removeTask(id: string) {
-        let filteredTasks = tasks.filter((t) => id !== t.id)
-        setTasks(filteredTasks)
+        let filteredTasks = tasks.filter((t) => id !== t.id);
+        setTasks(filteredTasks);
     }
 //для фильтрации необх менять значение в фильтре,  не в local state!
     //эти значения поместим в useState
     let tasksForTodolist = tasks;
-    let [filter, setFilter] = useState<FilterTypeValue>('all')
+    let [filter, setFilter] = useState<FilterTypeValue>('all');
 
 
     function changeFilter(value: FilterTypeValue) {
@@ -31,7 +31,7 @@ function App() {
     }
     switch (filter) {
         case 'completed':
-            tasksForTodolist =  tasks.filter((t) => t.isDone === true)
+            tasksForTodolist =  tasks.filter((t) => t.isDone === true);
             break;
         case 'active':
             tasksForTodolist = tasks.filter((t) => t.isDone === false)
@@ -40,12 +40,16 @@ function App() {
     function addTask(value: string) {
         let newTask = {id: v1(), title: value, isDone: false};
         let setNewTask = [newTask, ...tasks]
-        setTasks(setNewTask)
+        setTasks(setNewTask);
     }
     //Change status of task
     function changeStatus(taskId: string) {
-        let task = tasks.find(t => taskId === t.id) //task is object
-        console.log(task)
+        let task = tasks.find(t => taskId === t.id);//task is object
+        if (task) {
+            task.isDone = !task.isDone
+        }
+        let copy = [...tasks]
+        setTasks(copy)
     }
 
     return (
@@ -58,6 +62,5 @@ function App() {
         </div>
     );
 }
-
 
 export default App;

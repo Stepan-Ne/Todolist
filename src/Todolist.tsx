@@ -21,11 +21,11 @@ type TypeOfProps = {
 // C O M P O N E N T
 export function Todolist(props: TypeOfProps) {
     //Local state for input
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("");
     //addTask
     const addTask = () => {
         props.addTask(title);
-        setTitle("")
+        setTitle("");
     }
     //OnKeyPressHandler
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ export function Todolist(props: TypeOfProps) {
     }
     //OnChangeHandler
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
+        setTitle(e.currentTarget.value);
     }
     //OnChangeFilter
     const onAllClickHandler = () => props.changeFilter('all');
@@ -48,7 +48,7 @@ export function Todolist(props: TypeOfProps) {
 
         const onRemoveTaskHandler = () => props.removeTask(t.id)
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            props.changeTaskStatus(t.id)
+            props.changeTaskStatus(t.id);
         }
 
         return <li key={t.id}>
@@ -56,6 +56,7 @@ export function Todolist(props: TypeOfProps) {
         <span>{t.title}</span>
         <button onClick={onRemoveTaskHandler}>x</button>
     </li>})
+
     return (
         <div>
             <h3>{props.title}</h3>
