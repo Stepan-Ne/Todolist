@@ -43,10 +43,10 @@ function App() {
         setTasks(setNewTask);
     }
     //Change status of task
-    function changeStatus(taskId: string) {
+    function changeStatus(taskId: string, isDone: boolean) {
         let task = tasks.find(t => taskId === t.id);//task is object
         if (task) {
-            task.isDone = !task.isDone
+            task.isDone = isDone; //e.currentTarget.checked
         }
         let copy = [...tasks]
         setTasks(copy)

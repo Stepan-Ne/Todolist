@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterTypeValue} from "./App";
-import {log} from "util";
+// import {log} from "util";
 
 //type of data
 export type TaskType = {
@@ -14,7 +14,7 @@ type TypeOfProps = {
     removeTask: (id: string) => void
     changeFilter: (value: FilterTypeValue) => void
     addTask: (value: string) => void
-    changeTaskStatus: (taskId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
 
@@ -22,9 +22,16 @@ type TypeOfProps = {
 export function Todolist(props: TypeOfProps) {
     //Local state for input
     const [title, setTitle] = useState("");
+    //State for error
+    const [error, setError] = useState<"Field is required" | "">("")
     //addTask
     const addTask = () => {
-        props.addTask(title);
+        if (title.trim() === "") {
+            setError("Field is required");
+            return
+        }
+        props.addTask(title.trim());
+        setError("")
         setTitle("");
     }
     //OnKeyPressHandler
@@ -35,6 +42,7 @@ export function Todolist(props: TypeOfProps) {
     }
     //OnChangeHandler
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setError("")
         setTitle(e.currentTarget.value);
     }
     //OnChangeFilter
@@ -48,7 +56,7 @@ export function Todolist(props: TypeOfProps) {
 
         const onRemoveTaskHandler = () => props.removeTask(t.id)
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            props.changeTaskStatus(t.id);
+            props.changeTaskStatus(t.id, e.currentTarget.checked);
         }
 
         return <li key={t.id}>
@@ -57,14 +65,17 @@ export function Todolist(props: TypeOfProps) {
         <button onClick={onRemoveTaskHandler}>x</button>
     </li>})
 
+// J S X
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
                 <input type="text" value={title}
                        onKeyPress={onKeyPressHandler}
-                       onChange={onChangeHandler}/>
+                       onChange={onChangeHandler}
+                className={error ? "error" : ""}/>
                 <button onClick={addTask}>+</button>
+                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {tasks}
