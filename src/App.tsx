@@ -31,15 +31,15 @@ function App() {
     }
     switch (filter) {
         case 'completed':
-            tasksForTodolist =  tasks.filter((t) => t.isDone === true);
+            tasksForTodolist =  tasks.filter(t => t.isDone === true);
             break;
         case 'active':
-            tasksForTodolist = tasks.filter((t) => t.isDone === false)
+            tasksForTodolist = tasks.filter(t => t.isDone === false)
     }
     //Add Task
     function addTask(value: string) {
         let newTask = {id: v1(), title: value, isDone: false};
-        let setNewTask = [newTask, ...tasks]
+        let setNewTask = [newTask, ...tasks];
         setTasks(setNewTask);
     }
     //Change status of task
@@ -48,7 +48,7 @@ function App() {
         if (task) {
             task.isDone = isDone; //e.currentTarget.checked
         }
-        let copy = [...tasks]
+        let copy = [...tasks];
         setTasks(copy)
     }
 
@@ -58,6 +58,7 @@ function App() {
                       changeTaskStatus = {changeStatus}
                       changeFilter={changeFilter}
                       addTask={addTask}
+                      filter={filter}
                       removeTask={removeTask}/>
         </div>
     );

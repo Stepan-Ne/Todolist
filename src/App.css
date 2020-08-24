@@ -12,3 +12,11 @@
 .error-message {
   color: red;
 }
+.active-filter {
+  background-color: lightgreen;
+  color: firebrick;
+  font-size: 1rem;
+}
+.is-done {
+  opacity: .5;
+}
