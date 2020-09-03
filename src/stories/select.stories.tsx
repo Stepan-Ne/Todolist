@@ -17,13 +17,12 @@ export const ControlledSelect = () => {
 
   const [parentValue, setParentValue] = useState<undefined | string>("1");
   const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    debugger
     setParentValue(e.currentTarget.value);
   }
   return <select value={parentValue} onChange={onChange}>
-    <option value="">none</option>
     <option value="1">Moscow</option>
     <option value="2">Kiev</option>
     <option value="3">Minsk</option>
+    <option value="3">St-Petersburg</option>
   </select>
 }
