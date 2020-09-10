@@ -16,8 +16,25 @@ export default {
 } as Meta;
 const arr = [{id: v1(), title: 'JS', isDone: true},
   {id: v1(), title: 'React', isDone: false}]
-export const Todolist1 = () => <Todolist title={"I Learn"} task={arr} removeTask={x=>x} changeFilter={() => {}} addTask={action("add task")} changeTaskStatus={() => {}} filter={"all"}/>
-export const Todolist2 = () => <Todolist title={"We Learn"} task={arr} removeTask={() => {}} changeFilter={() => {}} addTask={() => {}} changeTaskStatus={() => {}} filter={"active"}/>
+export const Todolist1 = () => <Todolist
+    key={"11"}
+    id={"1"}
+    title={"I Learn"}
+    task={arr} removeTask={x=>x}
+    changeFilter={() => {}}
+    addTask={action("add task")}
+    changeTaskStatus={() => {}}
+    filter={"all"}/>
+export const Todolist2 = () => <Todolist
+    key={"12"}
+    id={"2"}
+    title={"We Learn"}
+    task={arr}
+    removeTask={() => {}}
+    changeFilter={() => {}}
+    addTask={() => {}}
+    changeTaskStatus={() => {}}
+    filter={"active"}/>
 
 
 // const Template: Story<ButtonProps> = (args) => <Button {...args} />;
