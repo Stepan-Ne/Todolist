@@ -68,11 +68,14 @@ export function Todolist(props: TypeOfProps) {
             <button onClick={onRemoveTaskHandler}>x</button>
         </li>
     });
+    const removeTodolist = () => {
+        props.removeTodolist(props.id);
+    }
 
 // J S X
     return (
         <div>
-            <h3>{props.title} <button onClick={() => props.removeTodolist(props.id)}>x</button></h3>
+            <h3>{props.title} <button onClick={removeTodolist}>x</button></h3>
             <div>
                 <input type="text" value={title}
                        onKeyPress={onKeyPressHandler}

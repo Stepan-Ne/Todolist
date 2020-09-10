@@ -85,6 +85,7 @@ function App() {
         //find todolist with id
         let newTodolists = todolists.filter(tl => tl.id != todolistId);
         setTodolists(newTodolists);
+        delete tasks[todolistId];
 
     }
 
