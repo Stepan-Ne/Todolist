@@ -11,12 +11,13 @@ export type TaskType = {
 type TypeOfProps = {
     title: string
     task: Array<TaskType>
-    removeTask: (id: string) => void
+    removeTask: (id: string, todolistId: string) => void
     changeFilter: (value: FilterTypeValue, todolistId: string) => void
-    addTask: (value: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    addTask: (value: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
     filter: string//FilterTypeValue
     id: string
+    removeTodolist: (todolistId: string) => void
 }
 
 
@@ -32,7 +33,7 @@ export function Todolist(props: TypeOfProps) {
             setError("Field is required");
             return
         }
-        props.addTask(title.trim());
+        props.addTask(title.trim(), props.id);
         setError("");
         setTitle("");
     };
@@ -56,9 +57,9 @@ export function Todolist(props: TypeOfProps) {
 //Create tasks from props.task
     let tasks = props.task.map(t => {
 
-        const onRemoveTaskHandler = () => props.removeTask(t.id);
+        const onRemoveTaskHandler = () => props.removeTask(t.id, props.id);
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            props.changeTaskStatus(t.id, e.currentTarget.checked);
+            props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
         };
 
         return <li key={t.id} className={t.isDone ? "is-done" : ""}>
@@ -71,7 +72,7 @@ export function Todolist(props: TypeOfProps) {
 // J S X
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title} <button onClick={() => props.removeTodolist(props.id)}>x</button></h3>
             <div>
                 <input type="text" value={title}
                        onKeyPress={onKeyPressHandler}

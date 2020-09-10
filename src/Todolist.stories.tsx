@@ -17,6 +17,7 @@ export default {
 const arr = [{id: v1(), title: 'JS', isDone: true},
   {id: v1(), title: 'React', isDone: false}]
 export const Todolist1 = () => <Todolist
+    removeTodolist={action("remove Todolist")}
     key={"11"}
     id={"1"}
     title={"I Learn"}
@@ -26,6 +27,7 @@ export const Todolist1 = () => <Todolist
     changeTaskStatus={() => {}}
     filter={"all"}/>
 export const Todolist2 = () => <Todolist
+    removeTodolist={action("remove Todolist")}
     key={"12"}
     id={"2"}
     title={"We Learn"}
