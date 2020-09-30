@@ -1,43 +1,43 @@
-import React, {useState} from 'react';
-// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
-import { Story, Meta } from '@storybook/react/types-6-0';
-import {Todolist} from "./Todolist";
-import {v1} from "uuid";
-import './App.css';
-import {action} from "@storybook/addon-actions";
-
-
-
-export default {
-  title: 'Todolist',
-  component: Todolist,
-  argTypes: {
-  },
-} as Meta;
-const arr = [{id: v1(), title: 'JS', isDone: true},
-  {id: v1(), title: 'React', isDone: false}]
-export const Todolist1 = () => <Todolist
-    removeTodolist={action("remove Todolist")}
-    key={"11"}
-    id={"1"}
-    title={"I Learn"}
-    task={arr} removeTask={x=>x}
-    changeFilter={() => {}}
-    addTask={action("add task")}
-    changeTaskStatus={() => {}}
-    filter={"all"}/>
-export const Todolist2 = () => <Todolist
-    removeTodolist={action("remove Todolist")}
-    key={"12"}
-    id={"2"}
-    title={"We Learn"}
-    task={arr}
-    removeTask={() => {}}
-    changeFilter={() => {}}
-    addTask={() => {}}
-    changeTaskStatus={() => {}}
-    filter={"active"}/>
-
+// import React, {useState} from 'react';
+// // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
+// import { Story, Meta } from '@storybook/react/types-6-0';
+// import {Todolist} from "./Todolist";
+// import {v1} from "uuid";
+// import './App.css';
+// import {action} from "@storybook/addon-actions";
+//
+//
+//
+// export default {
+//   title: 'Todolist',
+//   component: Todolist,
+//   argTypes: {
+//   },
+// } as Meta;
+// const arr = [{id: v1(), title: 'JS', isDone: true},
+//   {id: v1(), title: 'React', isDone: false}]
+// export const Todolist1 = () => <Todolist
+//     removeTodolist={action("remove Todolist")}
+//     key={"11"}
+//     id={"1"}
+//     title={"I Learn"}
+//     task={arr} removeTask={x=>x}
+//     changeFilter={() => {}}
+//     addTask={action("add task")}
+//     changeTaskStatus={() => {}}
+//     filter={"all"}/>
+// export const Todolist2 = () => <Todolist
+//     removeTodolist={action("remove Todolist")}
+//     key={"12"}
+//     id={"2"}
+//     title={"We Learn"}
+//     task={arr}
+//     removeTask={() => {}}
+//     changeFilter={() => {}}
+//     addTask={() => {}}
+//     changeTaskStatus={() => {}}
+//     filter={"active"}/>
+//
 
 // const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 //
@@ -63,3 +63,4 @@ export const Todolist2 = () => <Todolist
 //   size: 'small',
 //   label: 'Button',
 // };
+export default 1;

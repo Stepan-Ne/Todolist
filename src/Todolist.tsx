@@ -18,6 +18,7 @@ type TypeOfProps = {
     addTask: (value: string, tlId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, tlId: string) => void
     filter: FilterTypeValue
+    removeTodolist: (id: string) => void
 }
 
 
@@ -75,7 +76,8 @@ export function Todolist(props: TypeOfProps) {
 // J S X
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title} <button onClick={() => props.removeTodolist(props.id)}>x</button></h3>
+
             <AddItemForm addItem={addItem}/>
             <ul>
                 {tasks}
