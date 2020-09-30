@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterTypeValue} from "./App";
+import {AddItemForm} from "./AddItemForm";
 // import {log} from "util";
 
 //type of data
@@ -9,15 +10,14 @@ export type TaskType = {
     isDone: boolean
 }
 type TypeOfProps = {
+    id: string
     title: string
     task: Array<TaskType>
-    removeTask: (id: string, todolistId: string) => void
-    changeFilter: (value: FilterTypeValue, todolistId: string) => void
-    addTask: (value: string, todolistId: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
-    filter: string//FilterTypeValue
-    id: string
-    removeTodolist: (todolistId: string) => void
+    removeTask: (id: string, tlId: string) => void
+    changeFilter: (value: FilterTypeValue, tlId: string) => void
+    addTask: (value: string, tlId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, tlId: string) => void
+    filter: FilterTypeValue
 }
 
 
@@ -68,34 +68,32 @@ export function Todolist(props: TypeOfProps) {
             <button onClick={onRemoveTaskHandler}>x</button>
         </li>
     });
-    const removeTodolist = () => {
-        props.removeTodolist(props.id);
-    }
+    const addItem = (title: string) => {
+        props.addTask(title, props.id);
+    };
 
 // J S X
     return (
         <div>
-            <h3>{props.title} <button onClick={removeTodolist}>x</button></h3>
-            <div>
-                <input type="text" value={title}
-                       onKeyPress={onKeyPressHandler}
-                       onChange={onChangeHandler}
-                       className={error ? "error" : ""}/>
-                <button onClick={addTask}>+</button>
-                {error && <div className="error-message">{error}</div>}
-            </div>
+            <h3>{props.title}</h3>
+            <AddItemForm addItem={addItem}/>
             <ul>
                 {tasks}
             </ul>
             <div>
                 <button className={props.filter === "all" ? "active-filter" : ""}
-                    onClick={onAllClickHandler}>All</button>
+                    onClick={onAllClickHandler}>All
+                </button>
                 <button className={props.filter === "active" ? "active-filter" : ""}
-                        onClick={onActiveClickHandler}>Active</button>
+                        onClick={onActiveClickHandler}>Active
+                </button>
                 <button className={props.filter === "completed" ? "active-filter" : ""}
-                        onClick={onCompletedClickHandler}>Completed</button>
+                        onClick={onCompletedClickHandler}>Completed
+                </button>
             </div>
 
         </div>
     )
-}
+};
+
+
