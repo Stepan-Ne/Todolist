@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterTypeValue} from "./App";
 import {AddItemForm} from "./AddItemForm";
+import EditableSpan from "./EditableSpan";
 // import {log} from "util";
 
 //type of data
@@ -19,6 +20,8 @@ type TypeOfProps = {
     changeTaskStatus: (taskId: string, isDone: boolean, tlId: string) => void
     filter: FilterTypeValue
     removeTodolist: (id: string) => void
+    onChangeTitleTask: (newTitle: string, taskId: string, tlId: string) => void
+    onChangeTodolistTitle: (newTitle: string, tlId: string) => void
 }
 
 
@@ -62,21 +65,28 @@ export function Todolist(props: TypeOfProps) {
         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
         };
+        const onChangeTitle = (newTitle: string) => {
+            props.onChangeTitleTask(newTitle, t.id, props.id);
+        }
 
         return <li key={t.id} className={t.isDone ? "is-done" : ""}>
             <input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>
-            <EditableSpan title={t.title}/>
+            <EditableSpan title={t.title} onChange={onChangeTitle}/>
             <button onClick={onRemoveTaskHandler}>x</button>
         </li>
     });
     const addItem = (title: string) => {
         props.addTask(title, props.id);
     };
+    const onChangeTodolistTitle = (newTitle: string) => {
+        props.onChangeTodolistTitle(newTitle, props.id);
+    }
 
 // J S X
     return (
         <div>
-            <h3>{props.title} <button
+            <h3><EditableSpan title={props.title}
+                              onChange={onChangeTodolistTitle}/><button
                 onClick={() => props.removeTodolist(props.id)}>x</button></h3>
 
             <AddItemForm addItem={addItem}/>
@@ -99,10 +109,4 @@ export function Todolist(props: TypeOfProps) {
     )
 };
 
-type EditableSpanPropsType = {
-    title: string
-}
-function EditableSpan(props: EditableSpanPropsType) {
-    return <span>{props.title}</span>
-}
 

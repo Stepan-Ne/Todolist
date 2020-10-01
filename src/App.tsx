@@ -13,6 +13,7 @@ type TodolistType = {
 type TaskStateType = {
     [key: string]: Array<TaskType>
 }
+
 function App() {
 
     let todolistId1 = v1();
@@ -38,7 +39,7 @@ function App() {
     }
 
     function changeFilter(value: FilterTypeValue, tlId: string) {
-      //find todolist:
+        //find todolist:
         let todolist = todolists.find(tl => tl.id === tlId);
         //change value of common object which linked(!) todolist:
         if (todolist) {
@@ -49,13 +50,14 @@ function App() {
     }
 
     //Add Task
-    function addTask(value: string, tlId:string) {
+    function addTask(value: string, tlId: string) {
         let newTask = {id: v1(), title: value, isDone: false};
         let task = tasksObj[tlId];
         task = [newTask, ...task];
         tasksObj[tlId] = task;
         setTasks({...tasksObj});
     }
+
     //Change status of task
     function changeStatus(taskId: string, isDone: boolean, tlId: string) {
 
@@ -83,12 +85,34 @@ function App() {
     const removeTodolist = (id: string) => {
         let newTodolists = todolists.filter(tl => tl.id != id);
         setTodolists(newTodolists);
+    };
+    const onChangeTitleTask = (newTitle: string, taskId: string, tlId: string) => {
+        //find Tasks of Todolist
+        const findedTasks = tasksObj[tlId];
+        //find task
+        const findedTask = findedTasks.find(tsk => tsk.id === taskId);
+        //change title of task
+        if (findedTask) {
+            findedTask.title = newTitle;
+        }
+        setTasks({...tasksObj});
+    };
+
+    //Chane title of Todolist
+    function onChangeTodolistTitle(newTitle: string, tlId: string) {
+        //find Todolist
+        const findedTodolist = todolists.find(tl => tl.id === tlId);
+        //change title of Todolist
+        if(findedTodolist) {
+            findedTodolist.title = newTitle;
+        }
+        setTodolists([...todolists]);
     }
 
     return (
         <div className="App">
 
-            <AddItemForm addItem={ addItem }/>
+            <AddItemForm addItem={addItem}/>
 
             {todolists.map(tl => {
                 let tasksForTodolist = tasksObj[tl.id];
@@ -100,14 +124,17 @@ function App() {
                 }
 
                 return <Todolist title={tl.title} task={tasksForTodolist}
-                                            removeTodolist={removeTodolist}
-                                           key={tl.id}
-                                           id={tl.id}
-                                           changeTaskStatus = {changeStatus}
-                                           changeFilter={changeFilter}
-                                           addTask={addTask}
-                                           filter={tl.filter}
-                                           removeTask={removeTask}/>})}
+                                 onChangeTodolistTitle={onChangeTodolistTitle}
+                                 onChangeTitleTask={onChangeTitleTask}
+                                 removeTodolist={removeTodolist}
+                                 key={tl.id}
+                                 id={tl.id}
+                                 changeTaskStatus={changeStatus}
+                                 changeFilter={changeFilter}
+                                 addTask={addTask}
+                                 filter={tl.filter}
+                                 removeTask={removeTask}/>
+            })}
 
         </div>
     );
