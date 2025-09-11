@@ -13,7 +13,7 @@
     "@types/uuid": "^8.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "typescript": "~3.7.2",
     "uuid": "^8.3.0"
   },
@@ -43,11 +43,11 @@
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@storybook/addon-actions": "^6.0.21",
-    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-essentials": "^6.5.16",
     "@storybook/addon-links": "^6.0.21",
     "@storybook/node-logger": "^6.0.21",
     "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.21",
+    "@storybook/react": "^6.5.16",
     "babel-loader": "^8.1.0",
     "react-is": "^16.13.1"
   }
